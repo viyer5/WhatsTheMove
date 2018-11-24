@@ -22,7 +22,7 @@ public class MainActivity extends Activity implements OnClickListener{
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.buttonNext){
-            Intent intent = new Intent(this, AppHomePageActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             startActivity(intent);
         }

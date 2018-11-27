@@ -18,5 +18,10 @@
         android:layout_width="143dp"
         android:layout_height="71dp"
         android:text="WhatsTheMove" />
+    <Button
+        android:id="@+id/buttonSlide"
+        android:layout_width="143dp"
+        android:layout_height="71dp"
+        android:text="Slidedeck"/>
 
 </LinearLayout>

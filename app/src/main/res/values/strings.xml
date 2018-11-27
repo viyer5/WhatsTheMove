@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">WhatsTheMove</string>
     <string name="title_activity_maps">Map</string>
+    <string name="noot">NULL</string>
+    <string name="placeholder">I am placeholder text. I am placeholder text. I am placeholder text.
+            I am placeholder text. I am placeholder text. I am placeholder text.
+            I am placeholder text. I am placeholder text. I am placeholder text.
+            I am placeholder text. I am placeholder text. I am placeholder text.
+            I am placeholder text. I am placeholder text. I am placeholder text.
+            I am placeholder text. I am placeholder text. I am placeholder text.
+            I am placeholder text. I am placeholder text. I am placeholder text.
+            I am placeholder text. I am placeholder text. I am placeholder text.
+            I am placeholder text. I am placeholder text. I am placeholder text.
+            I am placeholder text. I am placeholder text. I am placeholder text.
+            I am placeholder text. I am placeholder text. I am placeholder text.
+            I am placeholder text. I am placeholder text. I am placeholder text.
+            I am placeholder text. I am placeholder text. I am placeholder text. </string>
 </resources>

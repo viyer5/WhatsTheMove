@@ -10,19 +10,26 @@ import android.widget.Button;
 public class MainActivity extends Activity implements OnClickListener{
 
     private Button next;
+    private Button slide;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         next = (Button) findViewById(R.id.buttonNext);
+        slide = (Button) findViewById(R.id.buttonSlide);
         next.setOnClickListener(this);
+        slide.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.buttonNext){
             Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
+        }
+        if(v.getId() == R.id.buttonSlide){
+            Intent intent = new Intent(this, ScreenSlidePagerActivity.class);
             startActivity(intent);
         }
     }

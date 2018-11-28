@@ -71,10 +71,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
+        } else {
+            buildGoogleApiClient();
+            mMap.setMyLocationEnabled(true);
         }
 
-        buildGoogleApiClient();
-        mMap.setMyLocationEnabled(true);
     }
 
     @Override

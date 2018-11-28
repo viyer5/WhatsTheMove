@@ -11,6 +11,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
     private Button next;
     private Button slide;
+    private Button filters;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +19,8 @@ public class MainActivity extends Activity implements OnClickListener{
 
         next = (Button) findViewById(R.id.buttonNext);
         slide = (Button) findViewById(R.id.buttonSlide);
+        filters = (Button) findViewById(R.id.FiltersPage);
+        filters.setOnClickListener(this);
         next.setOnClickListener(this);
         slide.setOnClickListener(this);
     }
@@ -30,6 +33,10 @@ public class MainActivity extends Activity implements OnClickListener{
         }
         if(v.getId() == R.id.buttonSlide){
             Intent intent = new Intent(this, ScreenSlidePagerActivity.class);
+            startActivity(intent);
+        }
+        if(v.getId() == R.id.FiltersPage){
+            Intent intent = new Intent(this, SetFiltersActivity.class);
             startActivity(intent);
         }
     }

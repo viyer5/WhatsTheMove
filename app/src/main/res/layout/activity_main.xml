@@ -23,5 +23,10 @@
         android:layout_width="143dp"
         android:layout_height="71dp"
         android:text="Slidedeck"/>
+    <Button
+        android:id="@+id/FiltersPage"
+        android:layout_width="143dp"
+        android:layout_height="71dp"
+        android:text="Set Filters"/>
 
 </LinearLayout>

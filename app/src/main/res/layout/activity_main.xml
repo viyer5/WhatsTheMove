@@ -14,16 +14,6 @@
         android:text="Welcome to WhatsTheMove (stock welcome page)" />
 
     <Button
-        android:id="@+id/buttonNext"
-        android:layout_width="143dp"
-        android:layout_height="71dp"
-        android:text="WhatsTheMove" />
-    <Button
-        android:id="@+id/buttonSlide"
-        android:layout_width="143dp"
-        android:layout_height="71dp"
-        android:text="Slidedeck"/>
-    <Button
         android:id="@+id/FiltersPage"
         android:layout_width="143dp"
         android:layout_height="71dp"

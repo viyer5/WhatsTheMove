@@ -55,6 +55,7 @@
                 android:text="Museum/Attraction" />
 
             <RadioButton
+                android:checked="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Anything" />
@@ -86,6 +87,8 @@
                 android:text="Price Range" />
 
             <RadioButton
+                android:id="@+id/RadioButtonPriceRange"
+                android:checked="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -101,6 +104,7 @@
             android:orientation="vertical">
 
             <SeekBar
+                android:id="@+id/seekaBarPriceRange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="100"
@@ -135,6 +139,8 @@
                 android:gravity="center" />
 
             <RadioButton
+                android:id="@+id/RadioButtonDistanceRange"
+                android:checked="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Any"
@@ -150,11 +156,12 @@
             android:gravity="center">
 
             <SeekBar
+                android:id="@+id/seekaBarDistance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:max="100"
+                android:max="30"
                 android:min="0"
-                android:progress="50"/>
+                android:progress="15"/>
 
         </LinearLayout>
 
@@ -184,6 +191,8 @@
                 android:gravity="center" />
 
             <RadioButton
+                android:id="@+id/RadioButtonDurationRange"
+                android:checked="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Any"
@@ -199,11 +208,12 @@
             android:gravity="center">
 
             <SeekBar
+                android:id="@+id/seekaBarDuration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:max="100"
+                android:max="12"
                 android:min="0"
-                android:progress="50"/>
+                android:progress="6"/>
 
         </LinearLayout>
 
@@ -234,6 +244,7 @@
                 android:gravity="center" />
 
             <RadioButton
+                android:checked="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Any"

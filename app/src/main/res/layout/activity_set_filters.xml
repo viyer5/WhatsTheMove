@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@color/background">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -17,12 +18,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="What's The Move"
+            android:text="What's The Move?"
             android:textSize="24dp"
             android:gravity="center"/>
 
         <Button
             android:id="@+id/resetFilter"
+            android:background="@color/ButtonBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -367,10 +369,12 @@
         
         <Button
             android:id="@+id/whatsTheMoveButton"
+            android:background="@color/ButtonBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="What's The Move?" />
         <Button
+            android:background="@color/CancelButton"
             android:id="@+id/cancelButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -3,20 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@color/background">
 
-    <EditText
+    <TextView
         android:id="@+id/editText3"
+        android:gravity="center"
         android:layout_width="245dp"
         android:layout_height="70dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:text="Welcome to WhatsTheMove (stock welcome page)" />
+        android:textSize="30dp"
+        android:text="What's the Move?" />
 
     <Button
         android:id="@+id/FiltersPage"
+        android:background="@color/ButtonBackground"
         android:layout_width="143dp"
         android:layout_height="71dp"
-        android:text="Set Filters"/>
+        android:text="Go"/>
 
 </LinearLayout>

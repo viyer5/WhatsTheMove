@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -27,11 +29,18 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
     private EditText priceText;
     private EditText distanceText;
     private EditText durationText;
+    private RadioButton anyTypeRadioButton;
+    private RadioButton anyFeatureRadioButton;
+    private RadioGroup activeRadioGroup;
+    private RadioGroup popularRadioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_filters);
+
+        anyTypeRadioButton = (RadioButton) findViewById(R.id.anyTypeRadioButton);
+        anyTypeRadioButton.setChecked(true);
 
         whatsTheMove = (Button) findViewById(R.id.whatsTheMoveButton);
         cancel = (Button) findViewById(R.id.cancelButton);
@@ -54,6 +63,11 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
         duration = (SeekBar)findViewById(R.id.seekaBarDuration);
         durationText = (EditText) findViewById(R.id.durationEditText);
         setSliderTextListeners(durationText, duration, durationRangeAnyButton);
+
+        activeRadioGroup = (RadioGroup) findViewById(R.id.activeRadioGroup);
+        popularRadioGroup = (RadioGroup) findViewById(R.id.popularRadioGroup);
+        anyFeatureRadioButton = (RadioButton) findViewById(R.id.anyFeatureRadioButton);
+        setFeatureButtonBehavior();
 
     }
 
@@ -122,6 +136,35 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
                     }
                 } catch (NumberFormatException e) {
                     // Do nothing; the text is empty
+                }
+            }
+        });
+    }
+
+    private void setFeatureButtonBehavior() {
+        anyFeatureRadioButton.setChecked(true);
+        anyFeatureRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    activeRadioGroup.clearCheck();
+                    popularRadioGroup.clearCheck();
+                }
+            }
+        });
+        activeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1) {
+                    anyFeatureRadioButton.setChecked(false);
+                }
+            }
+        });
+        popularRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1) {
+                    anyFeatureRadioButton.setChecked(false);
                 }
             }
         });

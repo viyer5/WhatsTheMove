@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Price Range" />
+                android:text="Price Range ($)" />
 
             <RadioButton
                 android:id="@+id/RadioButtonPriceRange"
@@ -150,7 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Distance"
+                android:text="Distance (mi)"
                 android:gravity="center" />
 
             <RadioButton
@@ -214,7 +214,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Duration"
+                android:text="Duration (hr)"
                 android:gravity="center" />
 
             <RadioButton

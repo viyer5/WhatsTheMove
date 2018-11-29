@@ -74,6 +74,7 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.cancelButton){
+            // TODO: this should just go back instead of to the landing page
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -82,8 +83,14 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
             startActivity(intent);
         }
         if(v.getId() == R.id.resetFilter){
-            Intent intent = new Intent(this, SetFiltersActivity.class);
-            startActivity(intent);
+            anyTypeRadioButton.setChecked(true);
+            pRangeAnyButton.setChecked(true);
+            priceRange.setProgress(50);
+            distanceRangeAnyButton.setChecked(true);
+            distance.setProgress(15);
+            durationRangeAnyButton.setChecked(true);
+            duration.setProgress(6);
+            anyFeatureRadioButton.setChecked(true);
         }
     }
 

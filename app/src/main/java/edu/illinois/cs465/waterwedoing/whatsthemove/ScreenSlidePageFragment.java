@@ -16,13 +16,35 @@ import org.w3c.dom.Text;
 
 public class ScreenSlidePageFragment extends Fragment {
 
+    private static final String RESULT = "result";
+    private static final String POSITION = "position";
+
 //    private int String_idx = 0;
-    private String titleString = "Title";
-    private String descString = "Description Description Description";
-    private boolean isFirst = false;
-    private boolean isLast = false;
-    private int rating = 5;
-    private int timing = 1;
+    private SearchResult searchResult;
+    private int position;
+
+    public ScreenSlidePageFragment() {
+
+    }
+
+    public static ScreenSlidePageFragment newInstance(SearchResult res, int pos) {
+        ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(RESULT, res);
+        args.putInt(POSITION, pos);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            searchResult = getArguments().getParcelable(RESULT);
+            position = getArguments().getInt(POSITION);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState)
     {
@@ -33,34 +55,34 @@ public class ScreenSlidePageFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page,
                 container, false);
         TextView actTitle = (TextView)rootView.findViewById(R.id.Activity_Title);
-        actTitle.setText(titleString);
+        actTitle.setText(searchResult.getTitle());
 
         TextView actDesc = (TextView)rootView.findViewById(R.id.Activity_Description);
-        actDesc.setText(descString);
+        actDesc.setText(searchResult.getDescription());
 
         TextView actTime = (TextView)rootView.findViewById(R.id.Activity_Timing);
-        actTime.setText("This activity will take " + timing + " hour(s)");
+        actTime.setText("This activity will take " + searchResult.getTime() + " hour(s)");
 
-        if (isFirst) {
+        if (position == 0) {
             ImageView sLeft = (ImageView)rootView.findViewById(R.id.swipe_left);
             sLeft.setVisibility(View.INVISIBLE);
         }
 
-        if (isLast){
+        Resources res = getResources();
+        if (position == res.getInteger(R.integer.num_pages) - 1){
             ImageView sRight = (ImageView)rootView.findViewById(R.id.swipe_right);
             sRight.setVisibility(View.INVISIBLE);
         }
 
         ImageView activityImg = (ImageView)rootView.findViewById(R.id.Activity_Image);
-        Resources res = getResources();
-        switch(titleString){
+        switch(searchResult.getTitle()){
             case "Krannert Art Museum":
                 activityImg.setImageDrawable(res.getDrawable(R.drawable.krannert));
                 break;
             case "UI Ice Arena":
                 activityImg.setImageDrawable(res.getDrawable(R.drawable.ice_arena));
                 break;
-            case "Unviersity of Illinois Observatory":
+            case "University of Illinois Observatory":
                 activityImg.setImageDrawable(res.getDrawable(R.drawable.uofiobservatory));
                 break;
             case "Cravings":
@@ -72,8 +94,7 @@ public class ScreenSlidePageFragment extends Fragment {
         }
 
         ImageView ratingImg = (ImageView)rootView.findViewById(R.id.Activity_Rating);
-        res = getResources();
-        switch (rating){
+        switch (searchResult.getRating()){
             case 1:
                 ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_1));
                 break;
@@ -94,29 +115,5 @@ public class ScreenSlidePageFragment extends Fragment {
                 break;
         }
         return rootView;
-    }
-
-    public void setTitle(String str) {
-        titleString = str;
-    }
-
-    public void setDesc(String str) {
-        descString = str;
-    }
-
-    public void setFirst(boolean first) {
-        isFirst = first;
-    }
-
-    public void setLast(boolean last) {
-        isLast = last;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public void setTiming(int timing) {
-        this.timing = timing;
     }
 }

@@ -164,6 +164,8 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId != -1) {
                     anyFeatureRadioButton.setChecked(false);
+                } else {
+                    anyFeatureRadioButton.setChecked(true);
                 }
             }
         });
@@ -172,6 +174,8 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId != -1) {
                     anyFeatureRadioButton.setChecked(false);
+                } else {
+                    anyFeatureRadioButton.setChecked(true);
                 }
             }
         });

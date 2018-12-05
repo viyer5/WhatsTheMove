@@ -2,28 +2,28 @@ package edu.illinois.cs465.waterwedoing.whatsthemove;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 public class SetFiltersActivity extends Activity implements View.OnClickListener {
     private Button whatsTheMove;
     private Button cancel;
     private Button resetFilter;
-    private SeekBar priceRange;
+    private SeekBar price;
     private SeekBar distance;
     private SeekBar duration;
-    private RadioButton pRangeAnyButton;
+    private RadioButton priceRangeAnyButton;
     private RadioButton distanceRangeAnyButton;
     private RadioButton durationRangeAnyButton;
     private EditText priceText;
@@ -48,21 +48,27 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
         cancel.setOnClickListener(this);
         resetFilter = (Button) findViewById(R.id.resetFilter);
         resetFilter.setOnClickListener(this);
-        pRangeAnyButton = (RadioButton) findViewById(R.id.RadioButtonPriceRange);
 
-        priceRange = (SeekBar) findViewById(R.id.seekaBarPriceRange);
+        priceRangeAnyButton = (RadioButton) findViewById(R.id.RadioButtonPriceRange);
+        price = (SeekBar) findViewById(R.id.seekBarPriceRange);
         priceText = (EditText) findViewById(R.id.priceEditText);
-        setSliderTextListeners(priceText, priceRange, pRangeAnyButton);
+        setSliderAnyButtonListener(priceRangeAnyButton, price);
+        setSliderTextListeners(priceText, price, priceRangeAnyButton);
+        priceRangeAnyButton.setChecked(true);
 
         distanceRangeAnyButton = (RadioButton) findViewById(R.id.RadioButtonDistanceRange);
-        distance = (SeekBar) findViewById(R.id.seekaBarDistance);
+        distance = (SeekBar) findViewById(R.id.seekBarDistance);
         distanceText = (EditText) findViewById(R.id.distanceEditText);
+        setSliderAnyButtonListener(distanceRangeAnyButton, distance);
         setSliderTextListeners(distanceText, distance, distanceRangeAnyButton);
+        distanceRangeAnyButton.setChecked(true);
 
         durationRangeAnyButton = (RadioButton) findViewById(R.id.RadioButtonDurationRange);
-        duration = (SeekBar)findViewById(R.id.seekaBarDuration);
+        duration = (SeekBar)findViewById(R.id.seekBarDuration);
         durationText = (EditText) findViewById(R.id.durationEditText);
+        setSliderAnyButtonListener(durationRangeAnyButton, duration);
         setSliderTextListeners(durationText, duration, durationRangeAnyButton);
+        durationRangeAnyButton.setChecked(true);
 
         activeRadioGroup = (RadioGroup) findViewById(R.id.activeRadioGroup);
         popularRadioGroup = (RadioGroup) findViewById(R.id.popularRadioGroup);
@@ -84,14 +90,30 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
         }
         if(v.getId() == R.id.resetFilter){
             anyTypeRadioButton.setChecked(true);
-            pRangeAnyButton.setChecked(true);
-            priceRange.setProgress(50);
-            distanceRangeAnyButton.setChecked(true);
+            price.setProgress(50);
+            priceRangeAnyButton.setChecked(true);
             distance.setProgress(15);
-            durationRangeAnyButton.setChecked(true);
+            distanceRangeAnyButton.setChecked(true);
             duration.setProgress(6);
+            durationRangeAnyButton.setChecked(true);
             anyFeatureRadioButton.setChecked(true);
         }
+    }
+
+    private void setSliderAnyButtonListener(final RadioButton anyButton, final SeekBar seekBar) {
+        anyButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // seekBar.setEnabled(!isChecked);
+                if (isChecked) {
+                    seekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.common_google_signin_btn_text_light_disabled), PorterDuff.Mode.MULTIPLY);
+                    seekBar.getThumb().setColorFilter(getResources().getColor(R.color.common_google_signin_btn_text_light_disabled), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    seekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+                    seekBar.getThumb().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+                }
+            }
+        });
     }
 
     private void setSliderTextListeners(final EditText editText, final SeekBar seekBar, final RadioButton anyButton) {

@@ -75,45 +75,11 @@ public class ScreenSlidePageFragment extends Fragment {
         }
 
         ImageView activityImg = (ImageView)rootView.findViewById(R.id.Activity_Image);
-        switch(searchResult.getTitle()){
-            case "Krannert Art Museum":
-                activityImg.setImageDrawable(res.getDrawable(R.drawable.krannert));
-                break;
-            case "UI Ice Arena":
-                activityImg.setImageDrawable(res.getDrawable(R.drawable.ice_arena));
-                break;
-            case "University of Illinois Observatory":
-                activityImg.setImageDrawable(res.getDrawable(R.drawable.uofiobservatory));
-                break;
-            case "Cravings":
-                activityImg.setImageDrawable(res.getDrawable(R.drawable.cravings));
-                break;
-            case "Taco Bell":
-                activityImg.setImageDrawable(res.getDrawable(R.drawable.tacobell));
-                break;
-        }
+        activityImg.setImageDrawable(res.getDrawable(searchResult.getImageId()));
 
         ImageView ratingImg = (ImageView)rootView.findViewById(R.id.Activity_Rating);
-        switch (searchResult.getRating()){
-            case 1:
-                ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_1));
-                break;
-            case 2:
-                ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_2));
-                break;
-            case 3:
-                ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_3));
-                break;
-            case 4:
-                ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_4));
-                break;
-            case 5:
-                ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_5));
-                break;
-            default:
-                ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_1));
-                break;
-        }
+        ratingImg.setImageDrawable(res.getDrawable(searchResult.getRatingImageId()));
+
         return rootView;
     }
 }

@@ -21,20 +21,10 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class CardFront extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-    private static final String TITLE = "title";
-    private static final String PICTURE = "picture";
-    private static final String DESCRIPTION = "description";
+    private static final String RESULT = "result";
 
-    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
-    private String title;
-    private int pictureId;
-    private String description;
+    private SearchResult searchResult;
 
     private OnFragmentInteractionListener mListener;
 
@@ -46,20 +36,14 @@ public class CardFront extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param title The title of the result.
-     * @param pictureId The drawable id of the picture.
-     * @param description The description of the result.
+     * @param result The searchResult to display.
      * @return A new instance of fragment CardFront.
      */
     // TODO: Rename and change types and number of parameters
-    public static CardFront newInstance(String title, int pictureId, String description) {
+    public static CardFront newInstance(SearchResult result) {
         CardFront fragment = new CardFront();
         Bundle args = new Bundle();
-        args.putString(TITLE, title);
-        args.putInt(PICTURE, pictureId);
-        args.putString(DESCRIPTION, description);
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
+        args.putParcelable(RESULT, result);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,9 +52,7 @@ public class CardFront extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            title = getArguments().getString(TITLE);
-            pictureId = getArguments().getInt(PICTURE);
-            description = getArguments().getString(DESCRIPTION);
+            searchResult = getArguments().getParcelable(RESULT);
         }
     }
 
@@ -80,14 +62,14 @@ public class CardFront extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_card_front, container, false);
         TextView titleView = (TextView) rootView.findViewById(R.id.cardFrontTitle);
-        titleView.setText(title);
+        titleView.setText(searchResult.getTitle());
 
         ImageView pictureView = (ImageView) rootView.findViewById(R.id.cardFrontImage);
         Resources res = getResources();
-        pictureView.setImageDrawable(res.getDrawable(pictureId));
+        pictureView.setImageDrawable(res.getDrawable(searchResult.getImageId()));
 
         TextView descriptionView = (TextView) rootView.findViewById(R.id.cardFrontDescription);
-        descriptionView.setText(description);
+        descriptionView.setText(searchResult.getDescription());
         return rootView;
     }
 

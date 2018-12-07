@@ -15,6 +15,7 @@
             I am placeholder text. I am placeholder text. I am placeholder text.
             I am placeholder text. I am placeholder text. I am placeholder text.
             I am placeholder text. I am placeholder text. I am placeholder text. </string>
+    <string name="duration">Duration: %1$d hours</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

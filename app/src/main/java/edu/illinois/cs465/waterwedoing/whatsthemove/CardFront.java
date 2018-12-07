@@ -61,14 +61,14 @@ public class CardFront extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_card_front, container, false);
-        TextView titleView = (TextView) rootView.findViewById(R.id.cardFrontTitle);
+        TextView titleView = (TextView) rootView.findViewById(R.id.titleText);
         titleView.setText(searchResult.getTitle());
 
-        ImageView pictureView = (ImageView) rootView.findViewById(R.id.cardFrontImage);
+        ImageView pictureView = (ImageView) rootView.findViewById(R.id.image);
         Resources res = getResources();
         pictureView.setImageDrawable(res.getDrawable(searchResult.getImageId()));
 
-        TextView descriptionView = (TextView) rootView.findViewById(R.id.cardFrontDescription);
+        TextView descriptionView = (TextView) rootView.findViewById(R.id.descriptionText);
         descriptionView.setText(searchResult.getDescription());
         return rootView;
     }

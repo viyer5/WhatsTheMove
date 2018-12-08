@@ -79,14 +79,7 @@ public class ScreenSlidePageFragment extends Fragment {
             sRight.setVisibility(View.INVISIBLE);
         }
 
-        rootView.findViewById(R.id.flipButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                flipCard();
-            }
-        });
-
-        rootView.setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(R.id.container).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("CLICK_CLICK", "container clicked");
@@ -94,13 +87,10 @@ public class ScreenSlidePageFragment extends Fragment {
             }
         });
 
-//        float scale = rootView.getResources().getDisplayMetrics().density;
-//        rootView.setCameraDistance(8000 * scale);
-
         return rootView;
     }
 
-    private void flipCard() {
+    public void flipCard() {
         if (mShowingBack) {
             getChildFragmentManager().popBackStack();
             mShowingBack = false;

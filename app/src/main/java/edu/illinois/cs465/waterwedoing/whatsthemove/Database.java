@@ -45,4 +45,21 @@ public class Database {
                 return R.drawable.stars_1;
         }
     }
+
+    public static int getPriceImageId(int price) {
+        switch(price) {
+            case 1:
+                return R.drawable.dollar_1;
+            case 2:
+                return R.drawable.dollar_2;
+            case 3:
+                return R.drawable.dollar_3;
+            case 4:
+                return R.drawable.dollar_4;
+            case 5:
+                return R.drawable.dollar_5;
+            default:
+                return R.drawable.dollar_1;
+        }
+    }
 }

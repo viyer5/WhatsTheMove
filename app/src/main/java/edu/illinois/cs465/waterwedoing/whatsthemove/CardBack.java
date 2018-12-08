@@ -72,11 +72,18 @@ public class CardBack extends Fragment {
         timeView.setText(getString(R.string.duration, searchResult.getTime()));
 
         ImageView priceView = (ImageView) rootView.findViewById(R.id.priceImage);
-        // for now, use the rating image id
-        priceView.setImageDrawable(res.getDrawable(searchResult.getRatingImageId()));
+        priceView.setImageDrawable(res.getDrawable(searchResult.getPriceImageId()));
 
-        ImageView ratingView = (ImageView) rootView.findViewById(R.id.priceImage);
+        ImageView ratingView = (ImageView) rootView.findViewById(R.id.ratingImage);
         ratingView.setImageDrawable(res.getDrawable(searchResult.getRatingImageId()));
+
+        final ScreenSlidePageFragment parent = (ScreenSlidePageFragment) getParentFragment();
+        rootView.findViewById(R.id.content).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parent.flipCard();
+            }
+        });
 
         return rootView;
     }

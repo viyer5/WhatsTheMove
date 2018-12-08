@@ -11,6 +11,7 @@ public class SearchResult implements Parcelable {
     private int cost;
     private int ratingImageId;
     private int imageId;
+    private int priceImageId;
 
     public SearchResult() {
     }
@@ -23,6 +24,7 @@ public class SearchResult implements Parcelable {
         this.cost = cost;
         this.imageId = Database.getImageId(title);
         this.ratingImageId = Database.getRatingImageId(rating);
+        this.priceImageId = Database.getPriceImageId(cost);
     }
 
     protected SearchResult(Parcel in) {
@@ -33,6 +35,7 @@ public class SearchResult implements Parcelable {
         cost = in.readInt();
         ratingImageId = in.readInt();
         imageId = in.readInt();
+        priceImageId = in.readInt();
     }
 
     @Override
@@ -44,6 +47,7 @@ public class SearchResult implements Parcelable {
         dest.writeInt(cost);
         dest.writeInt(ratingImageId);
         dest.writeInt(imageId);
+        dest.writeInt(priceImageId);
     }
 
     @Override
@@ -117,5 +121,13 @@ public class SearchResult implements Parcelable {
 
     public void setImageId(int imageId) {
         this.imageId = imageId;
+    }
+
+    public int getPriceImageId() {
+        return priceImageId;
+    }
+
+    public void setPriceImageId(int priceImageId) {
+        this.priceImageId = priceImageId;
     }
 }

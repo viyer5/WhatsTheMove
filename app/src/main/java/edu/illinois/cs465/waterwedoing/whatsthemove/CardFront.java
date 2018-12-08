@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -72,10 +74,11 @@ public class CardFront extends Fragment {
         TextView descriptionView = (TextView) rootView.findViewById(R.id.descriptionText);
         descriptionView.setText(searchResult.getDescription());
 
-        rootView.setOnClickListener(new View.OnClickListener() {
+        final ScreenSlidePageFragment parent = (ScreenSlidePageFragment) getParentFragment();
+        rootView.findViewById(R.id.content).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("CLICK_CLICK", "card front has been clicked");
+                parent.flipCard();
             }
         });
 

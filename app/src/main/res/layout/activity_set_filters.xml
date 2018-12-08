@@ -13,23 +13,15 @@
         android:layout_weight="1"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="What's The Move?"
-            android:textSize="24dp"
-            android:gravity="center"/>
-
-        <Button
-            android:id="@+id/resetFilter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:background="@drawable/rounded_button"
-            android:text="RESET FILTERS" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/resetFilter"
+        android:layout_width="250dp"
+        android:layout_height="32dp"
+        android:layout_weight="2"
+        android:background="@drawable/rounded_button"
+        android:text="RESET FILTERS" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -70,14 +62,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Price Range ($)" />
+                android:text="Price Range ($)"
+                android:textColor="@color/textColor"/>
 
             <RadioButton
                 android:id="@+id/RadioButtonPriceRange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="Any" />
+                android:text="Any"
+                android:textColor="@color/textColor"/>
 
         </LinearLayout>
 
@@ -133,14 +127,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Distance (mi)"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textColor="@color/textColor"/>
 
             <RadioButton
                 android:id="@+id/RadioButtonDistanceRange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Any"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:textColor="@color/textColor"/>
 
         </LinearLayout>
 
@@ -196,14 +192,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Duration (hr)"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textColor="@color/textColor"/>
 
             <RadioButton
                 android:id="@+id/RadioButtonDurationRange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Any"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:textColor="@color/textColor"/>
 
         </LinearLayout>
 
@@ -259,7 +257,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Features"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textColor="@color/textColor"/>
 
             <RadioButton
                 android:id="@+id/anyFeatureRadioButton"

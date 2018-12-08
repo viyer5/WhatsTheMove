@@ -8,6 +8,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -15,8 +17,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 
-public class SetFiltersActivity extends Activity implements View.OnClickListener {
+import java.util.ArrayList;
+
+public class SetFiltersActivity extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private Button whatsTheMove;
     private Button cancel;
     private Button resetFilter;
@@ -34,13 +39,15 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
     private RadioGroup activeRadioGroup;
     private RadioGroup popularRadioGroup;
 
+    private Spinner spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_filters);
 
-        anyTypeRadioButton = (RadioButton) findViewById(R.id.anyTypeRadioButton);
-        anyTypeRadioButton.setChecked(true);
+        //anyTypeRadioButton = (RadioButton) findViewById(R.id.anyTypeRadioButton);
+        //anyTypeRadioButton.setChecked(true);
 
         whatsTheMove = (Button) findViewById(R.id.whatsTheMoveButton);
         cancel = (Button) findViewById(R.id.cancelButton);
@@ -74,6 +81,18 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
         popularRadioGroup = (RadioGroup) findViewById(R.id.popularRadioGroup);
         anyFeatureRadioButton = (RadioButton) findViewById(R.id.anyFeatureRadioButton);
         setFeatureButtonBehavior();
+
+        spinner = (Spinner) findViewById(R.id.dropDownSpinner);
+        ArrayList<String> categories = new ArrayList<String>();
+        categories.add("Anything");
+        categories.add("Restaurant");
+        categories.add("Museum/Attraction");
+        categories.add("Event/Activity");
+
+        spinner.setOnItemSelectedListener(this);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, categories);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinner.setAdapter(dataAdapter);
 
     }
 
@@ -201,5 +220,15 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
                 }
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String item = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

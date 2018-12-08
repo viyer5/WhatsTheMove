@@ -38,31 +38,14 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <Spinner
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dropDownSpinner"
+            android:textSize="80dp"
+            android:textColor="#ff0000">
+        </Spinner>
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Restaurant" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Activity" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Museum/Attraction" />
-
-            <RadioButton
-                android:id="@+id/anyTypeRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Anything" />
-        </RadioGroup>
 
     </LinearLayout>
 

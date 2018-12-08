@@ -6,10 +6,13 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -22,6 +25,7 @@ public class ScreenSlidePageFragment extends Fragment {
 //    private int String_idx = 0;
     private SearchResult searchResult;
     private int position;
+    private boolean mShowingBack;
 
     public ScreenSlidePageFragment() {
 
@@ -39,9 +43,18 @@ public class ScreenSlidePageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             searchResult = getArguments().getParcelable(RESULT);
             position = getArguments().getInt(POSITION);
+            if (savedInstanceState == null) {
+                CardFront front = CardFront.newInstance(searchResult);
+                getChildFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.container, front)
+                        .commit();
+                mShowingBack = false;
+            }
         }
     }
 
@@ -54,14 +67,6 @@ public class ScreenSlidePageFragment extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page,
                 container, false);
-        TextView actTitle = (TextView)rootView.findViewById(R.id.Activity_Title);
-        actTitle.setText(searchResult.getTitle());
-
-        TextView actDesc = (TextView)rootView.findViewById(R.id.Activity_Description);
-        actDesc.setText(searchResult.getDescription());
-
-        TextView actTime = (TextView)rootView.findViewById(R.id.Activity_Timing);
-        actTime.setText("This activity will take " + searchResult.getTime() + " hour(s)");
 
         if (position == 0) {
             ImageView sLeft = (ImageView)rootView.findViewById(R.id.swipe_left);
@@ -74,12 +79,66 @@ public class ScreenSlidePageFragment extends Fragment {
             sRight.setVisibility(View.INVISIBLE);
         }
 
-        ImageView activityImg = (ImageView)rootView.findViewById(R.id.Activity_Image);
-        activityImg.setImageDrawable(res.getDrawable(searchResult.getImageId()));
+        rootView.findViewById(R.id.flipButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flipCard();
+            }
+        });
 
-        ImageView ratingImg = (ImageView)rootView.findViewById(R.id.Activity_Rating);
-        ratingImg.setImageDrawable(res.getDrawable(searchResult.getRatingImageId()));
+        rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("CLICK_CLICK", "container clicked");
+                flipCard();
+            }
+        });
+
+//        float scale = rootView.getResources().getDisplayMetrics().density;
+//        rootView.setCameraDistance(8000 * scale);
 
         return rootView;
+    }
+
+    private void flipCard() {
+        if (mShowingBack) {
+            getChildFragmentManager().popBackStack();
+            mShowingBack = false;
+            return;
+        }
+
+        // Flip to the back
+
+        mShowingBack = true;
+        CardBack back = CardBack.newInstance(searchResult);
+
+        // Create and commit a new fragment transaction that adds the fragment for
+        // the back of the card, uses custom animations, and is part of the fragment
+        // manager's back stack.
+
+        getChildFragmentManager()
+                .beginTransaction()
+
+                // Replace the default fragment animations with animator resources
+                // representing rotations when switching to the back of the card, as
+                // well as animator resources representing rotations when flipping
+                // back to the front (e.g. when the system Back button is pressed).
+                .setCustomAnimations(
+                        R.animator.card_flip_left_in,
+                        R.animator.card_flip_left_out,
+                        R.animator.card_flip_left_in,
+                        R.animator.card_flip_left_out)
+
+                // Replace any fragments currently in the container view with a
+                // fragment representing the next page (indicated by the
+                // just-incremented currentPage variable).
+                .replace(R.id.container, back)
+
+                // Add this transaction to the back stack, allowing users to press
+                // Back to get to the front of the card.
+                .addToBackStack(null)
+
+                // Commit the transaction.
+                .commit();
     }
 }

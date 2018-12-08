@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/layout_bg"
+    android:elevation="2dp"
+    android:layout_margin="4dp"
     tools:context=".CardBack">
 
     <TextView

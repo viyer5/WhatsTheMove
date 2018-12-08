@@ -8,4 +8,5 @@
     <color name="CancelButton">#ff80b3</color>
     <color name="color1">#F7B2AD</color>
     <color name="color2">#BDFFFD</color>
+    <color name="textColor">#4c4c4c</color>
 </resources>

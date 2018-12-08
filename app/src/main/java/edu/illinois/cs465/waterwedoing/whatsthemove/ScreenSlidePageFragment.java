@@ -6,23 +6,58 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
 public class ScreenSlidePageFragment extends Fragment {
 
+    private static final String RESULT = "result";
+    private static final String POSITION = "position";
+
 //    private int String_idx = 0;
-    private String titleString = "Title";
-    private String descString = "Description Description Description";
-    private boolean isFirst = false;
-    private boolean isLast = false;
-    private int rating = 5;
-    private int timing = 1;
+    private SearchResult searchResult;
+    private int position;
+    private boolean mShowingBack;
+
+    public ScreenSlidePageFragment() {
+
+    }
+
+    public static ScreenSlidePageFragment newInstance(SearchResult res, int pos) {
+        ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(RESULT, res);
+        args.putInt(POSITION, pos);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            searchResult = getArguments().getParcelable(RESULT);
+            position = getArguments().getInt(POSITION);
+            if (savedInstanceState == null) {
+                CardFront front = CardFront.newInstance(searchResult);
+                getChildFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.container, front)
+                        .commit();
+                mShowingBack = false;
+            }
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState)
     {
@@ -32,91 +67,68 @@ public class ScreenSlidePageFragment extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page,
                 container, false);
-        TextView actTitle = (TextView)rootView.findViewById(R.id.Activity_Title);
-        actTitle.setText(titleString);
 
-        TextView actDesc = (TextView)rootView.findViewById(R.id.Activity_Description);
-        actDesc.setText(descString);
-
-        TextView actTime = (TextView)rootView.findViewById(R.id.Activity_Timing);
-        actTime.setText("This activity will take " + timing + " hour(s)");
-
-        if (isFirst) {
+        if (position == 0) {
             ImageView sLeft = (ImageView)rootView.findViewById(R.id.swipe_left);
             sLeft.setVisibility(View.INVISIBLE);
         }
 
-        if (isLast){
+        Resources res = getResources();
+        if (position == res.getInteger(R.integer.num_pages) - 1){
             ImageView sRight = (ImageView)rootView.findViewById(R.id.swipe_right);
             sRight.setVisibility(View.INVISIBLE);
         }
 
-        ImageView activityImg = (ImageView)rootView.findViewById(R.id.Activity_Image);
-        Resources res = getResources();
-        switch(titleString){
-            case "Krannert Art Museum":
-                activityImg.setImageDrawable(res.getDrawable(R.drawable.krannert));
-                break;
-            case "UI Ice Arena":
-                activityImg.setImageDrawable(res.getDrawable(R.drawable.ice_arena));
-                break;
-            case "Unviersity of Illinois Observatory":
-                activityImg.setImageDrawable(res.getDrawable(R.drawable.uofiobservatory));
-                break;
-            case "Cravings":
-                activityImg.setImageDrawable(res.getDrawable(R.drawable.cravings));
-                break;
-            case "Taco Bell":
-                activityImg.setImageDrawable(res.getDrawable(R.drawable.tacobell));
-                break;
-        }
+        rootView.findViewById(R.id.container).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("CLICK_CLICK", "container clicked");
+                flipCard();
+            }
+        });
 
-        ImageView ratingImg = (ImageView)rootView.findViewById(R.id.Activity_Rating);
-        res = getResources();
-        switch (rating){
-            case 1:
-                ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_1));
-                break;
-            case 2:
-                ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_2));
-                break;
-            case 3:
-                ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_3));
-                break;
-            case 4:
-                ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_4));
-                break;
-            case 5:
-                ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_5));
-                break;
-            default:
-                ratingImg.setImageDrawable(res.getDrawable(R.drawable.stars_1));
-                break;
-        }
         return rootView;
     }
 
-    public void setTitle(String str) {
-        titleString = str;
-    }
+    public void flipCard() {
+        if (mShowingBack) {
+            getChildFragmentManager().popBackStack();
+            mShowingBack = false;
+            return;
+        }
 
-    public void setDesc(String str) {
-        descString = str;
-    }
+        // Flip to the back
 
-    public void setFirst(boolean first) {
-        isFirst = first;
-    }
+        mShowingBack = true;
+        CardBack back = CardBack.newInstance(searchResult);
 
-    public void setLast(boolean last) {
-        isLast = last;
-    }
+        // Create and commit a new fragment transaction that adds the fragment for
+        // the back of the card, uses custom animations, and is part of the fragment
+        // manager's back stack.
 
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
+        getChildFragmentManager()
+                .beginTransaction()
 
-    public void setTiming(int timing) {
-        this.timing = timing;
+                // Replace the default fragment animations with animator resources
+                // representing rotations when switching to the back of the card, as
+                // well as animator resources representing rotations when flipping
+                // back to the front (e.g. when the system Back button is pressed).
+                .setCustomAnimations(
+                        R.animator.card_flip_left_in,
+                        R.animator.card_flip_left_out,
+                        R.animator.card_flip_left_in,
+                        R.animator.card_flip_left_out)
+
+                // Replace any fragments currently in the container view with a
+                // fragment representing the next page (indicated by the
+                // just-incremented currentPage variable).
+                .replace(R.id.container, back)
+
+                // Add this transaction to the back stack, allowing users to press
+                // Back to get to the front of the card.
+                .addToBackStack(null)
+
+                // Commit the transaction.
+                .commit();
     }
 }

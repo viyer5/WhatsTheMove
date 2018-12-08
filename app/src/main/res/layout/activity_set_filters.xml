@@ -87,11 +87,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Price Range" />
+                android:text="Price Range ($)" />
 
             <RadioButton
                 android:id="@+id/RadioButtonPriceRange"
-                android:checked="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -107,7 +106,7 @@
             android:orientation="horizontal">
 
             <SeekBar
-                android:id="@+id/seekaBarPriceRange"
+                android:id="@+id/seekBarPriceRange"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:max="100"
@@ -150,12 +149,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Distance"
+                android:text="Distance (mi)"
                 android:gravity="center" />
 
             <RadioButton
                 android:id="@+id/RadioButtonDistanceRange"
-                android:checked="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Any"
@@ -171,7 +169,7 @@
             android:gravity="center">
 
             <SeekBar
-                android:id="@+id/seekaBarDistance"
+                android:id="@+id/seekBarDistance"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -214,12 +212,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Duration"
+                android:text="Duration (hr)"
                 android:gravity="center" />
 
             <RadioButton
                 android:id="@+id/RadioButtonDurationRange"
-                android:checked="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Any"
@@ -235,7 +232,7 @@
             android:gravity="center">
 
             <SeekBar
-                android:id="@+id/seekaBarDuration"
+                android:id="@+id/seekBarDuration"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

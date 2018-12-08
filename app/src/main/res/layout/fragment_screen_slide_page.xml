@@ -1,109 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_height="match_parent"
+<LinearLayout
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/NoTitle"
-    android:background="#ffffff">
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:background="@color/background">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <TextView style="?android:textAppearanceMedium"
-                android:id="@+id/Activity_Title"
-                android:lineSpacingMultiplier="1.2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="30dp"
-                android:text="@string/noot"/>
-            <ImageView
-                android:id="@+id/Activity_Image"
-                android:layout_width="300dp"
-                android:layout_height="200dp"
-                android:layout_below="@id/Activity_Title"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/placeholder_image"/>
-            <TextView
-                android:id="@+id/Activity_Description_Header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_below="@id/Activity_Image"
-                android:textAlignment="center"
-                android:text="Description:"/>
-            <TextView
-                android:id="@+id/Activity_Description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/Activity_Description_Header"
-                android:textSize="20dp"
-                android:paddingHorizontal="30dp"
-                android:text="@string/placeholder"/>
-            <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
-                <!--xmlns:map="http://schemas.android.com/apk/res-auto"-->
-                <!--xmlns:tools="http://schemas.android.com/tools"-->
-                <!--android:id="@+id/Activity_Map"-->
-                <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
-                <!--android:layout_width="300dp"-->
-                <!--android:layout_height="200dp"-->
-                <!--tools:context=".MapsActivity"-->
-                <!--android:layout_below="@id/Activity_Description"-->
-                <!--android:layout_centerHorizontal="true"/>-->
-            <TextView
-                android:id="@+id/Activity_Timing_Header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_below="@id/Activity_Description"
-                android:textAlignment="center"
-                android:text="Timing:"/>
-            <TextView
-                android:id="@+id/Activity_Timing"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/Activity_Timing_Header"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:paddingHorizontal="30dp"
-                android:text="This activity will take 10 hours"/>
-            <TextView
-                android:id="@+id/Activity_Rating_Header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_below="@id/Activity_Timing"
-                android:textAlignment="center"
-                android:text="Rating:"/>
-            <ImageView
-                android:id="@+id/Activity_Rating"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/Activity_Rating_Header"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/stars_5"/>
-        </RelativeLayout>
-    </ScrollView>
     <ImageView
         android:id="@+id/swipe_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
+        android:layout_gravity="center_vertical"
         android:src="@drawable/flick_right"
         android:visibility="visible"/>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <!-- Hold the card front/back fragment here -->
+
+    </FrameLayout>
+
     <ImageView
         android:id="@+id/swipe_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
+        android:layout_gravity="center_vertical"
         android:src="@drawable/flick_left"
         android:visibility="visible"/>
-</RelativeLayout>
+
+</LinearLayout>

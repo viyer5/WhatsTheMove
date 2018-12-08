@@ -6,4 +6,6 @@
     <color name="background">#f2e6ff</color>
     <color name="ButtonBackground">#d7b3ff</color>
     <color name="CancelButton">#ff80b3</color>
+    <color name="color1">#F7B2AD</color>
+    <color name="color2">#BDFFFD</color>
 </resources>

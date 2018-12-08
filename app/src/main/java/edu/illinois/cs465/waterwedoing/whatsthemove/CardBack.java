@@ -138,7 +138,8 @@ public class CardBack extends Fragment implements OnMapReadyCallback {
         LatLng activityLocation = new LatLng(searchResult.getLatitude(), searchResult.getLongitude());
         googleMap.addMarker(new MarkerOptions()
                 .position(activityLocation)
-                .title(searchResult.getTitle()));
+                .title(searchResult.getTitle()))
+                .showInfoWindow();
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(activityLocation, 18));
     }
 

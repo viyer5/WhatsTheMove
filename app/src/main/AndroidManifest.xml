@@ -51,7 +51,7 @@
             android:label="ScreenSlidePager"
             android:theme="@style/NoTitle"></activity>
         <activity android:name=".SetFiltersActivity"
-            android:label="SerFilters"></activity>
+            android:label="SetFilters"></activity>
     </application>
 
 </manifest>

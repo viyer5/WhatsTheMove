@@ -34,7 +34,6 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
     private EditText priceText;
     private EditText distanceText;
     private EditText durationText;
-    private RadioButton anyTypeRadioButton;
     private RadioButton anyFeatureRadioButton;
     private RadioGroup activeRadioGroup;
     private RadioGroup popularRadioGroup;
@@ -84,7 +83,7 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
 
         spinner = (Spinner) findViewById(R.id.dropDownSpinner);
         ArrayList<String> categories = new ArrayList<String>();
-        categories.add("Select Your Activity Type");
+        // categories.add("Select Your Activity Type");
         categories.add("Anything");
         categories.add("Restaurant");
         categories.add("Museum/Attraction");
@@ -109,7 +108,7 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
             startActivity(intent);
         }
         if(v.getId() == R.id.resetFilter){
-            anyTypeRadioButton.setChecked(true);
+            spinner.setSelection(0);
             price.setProgress(50);
             priceRangeAnyButton.setChecked(true);
             distance.setProgress(15);

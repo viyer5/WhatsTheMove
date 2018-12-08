@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
@@ -136,11 +137,11 @@ public class CardBack extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         LatLng activityLocation = new LatLng(searchResult.getLatitude(), searchResult.getLongitude());
-        googleMap.addMarker(new MarkerOptions()
+        Marker activityMarker = googleMap.addMarker(new MarkerOptions()
                 .position(activityLocation)
-                .title(searchResult.getTitle()))
-                .showInfoWindow();
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(activityLocation, 18));
+                .title(searchResult.getTitle()));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(activityLocation, 18));
+        activityMarker.showInfoWindow();
     }
 
     /**

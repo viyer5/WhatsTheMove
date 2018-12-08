@@ -12,31 +12,8 @@ public class SearchResult implements Parcelable {
     private int ratingImageId;
     private int imageId;
     private int priceImageId;
-
-    public SearchResult() {
-    }
-
-    public SearchResult(String title, String description, int rating, int time, int cost) {
-        this.title = title;
-        this.description = description;
-        this.rating = rating;
-        this.time = time;
-        this.cost = cost;
-        this.imageId = Database.getImageId(title);
-        this.ratingImageId = Database.getRatingImageId(rating);
-        this.priceImageId = Database.getPriceImageId(cost);
-    }
-
-    protected SearchResult(Parcel in) {
-        title = in.readString();
-        description = in.readString();
-        rating = in.readInt();
-        time = in.readInt();
-        cost = in.readInt();
-        ratingImageId = in.readInt();
-        imageId = in.readInt();
-        priceImageId = in.readInt();
-    }
+    private double latitude;
+    private double longitude;
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -48,6 +25,8 @@ public class SearchResult implements Parcelable {
         dest.writeInt(ratingImageId);
         dest.writeInt(imageId);
         dest.writeInt(priceImageId);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
     }
 
     @Override
@@ -66,6 +45,49 @@ public class SearchResult implements Parcelable {
             return new SearchResult[size];
         }
     };
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public SearchResult() {
+    }
+
+    public SearchResult(String title, String description, int rating, int time, int cost, double latitude, double longitude) {
+        this.title = title;
+        this.description = description;
+        this.rating = rating;
+        this.time = time;
+        this.cost = cost;
+        this.imageId = Database.getImageId(title);
+        this.ratingImageId = Database.getRatingImageId(rating);
+        this.priceImageId = Database.getPriceImageId(cost);
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    protected SearchResult(Parcel in) {
+        title = in.readString();
+        description = in.readString();
+        rating = in.readInt();
+        time = in.readInt();
+        cost = in.readInt();
+        ratingImageId = in.readInt();
+        imageId = in.readInt();
+        priceImageId = in.readInt();
+    }
 
     public String getTitle() {
         return title;

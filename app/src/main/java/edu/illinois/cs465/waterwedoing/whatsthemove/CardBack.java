@@ -5,11 +5,20 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 /**
@@ -20,7 +29,7 @@ import android.widget.TextView;
  * Use the {@link CardBack#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CardBack extends Fragment {
+public class CardBack extends Fragment implements OnMapReadyCallback {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String RESULT = "result";
@@ -85,6 +94,17 @@ public class CardBack extends Fragment {
             }
         });
 
+        GoogleMapOptions mapOptions = new GoogleMapOptions();
+        SupportMapFragment mapFragment = SupportMapFragment.newInstance(mapOptions);
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.mapContainer, mapFragment);
+        fragmentTransaction.commit();
+        mapFragment.getMapAsync(this);
+
+//        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+//                .findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
+
         return rootView;
     }
 
@@ -111,6 +131,15 @@ public class CardBack extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng activityLocation = new LatLng(searchResult.getLatitude(), searchResult.getLongitude());
+        googleMap.addMarker(new MarkerOptions()
+                .position(activityLocation)
+                .title(searchResult.getTitle()));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(activityLocation, 18));
     }
 
     /**

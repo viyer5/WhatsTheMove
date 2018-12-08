@@ -84,6 +84,7 @@ public class SetFiltersActivity extends Activity implements View.OnClickListener
 
         spinner = (Spinner) findViewById(R.id.dropDownSpinner);
         ArrayList<String> categories = new ArrayList<String>();
+        categories.add("Select Your Activity Type");
         categories.add("Anything");
         categories.add("Restaurant");
         categories.add("Museum/Attraction");
